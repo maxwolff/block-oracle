@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 interface IOracle {
-    // 1bytes + 8 + 20 (one slot)
+    // 1bytes + 8 + 20 (should be able to fit this in slot)
     struct TxHashInfo {
         bool didSucceed;
         uint64 blockNumber;
@@ -25,6 +25,17 @@ contract Oracle is IOracle {
     // block => did save
     mapping(uint32 => bool) public didSaveBlock;
 
+    address public owner;
+
+    constructor(){
+        owner = msg.sender;
+    }
+
+    function setOwner(address newOwner) public {
+        require(msg.sender == owner, "Only owner can set owner");
+        owner = newOwner;
+    }
+
     /// @notice saves block info to storage
     /// @dev make only owner?
     function storeBlock(
@@ -35,6 +46,7 @@ contract Oracle is IOracle {
     )
         public
     {
+        require(msg.sender == owner, "Only owner can post");
         require(txHashes.length == didSucceed.length, "Inconsistent lengths");
         // require(blockNumber < block.number, "Invalid info: future bn");// breaks testing
         require(didSaveBlock[blockNumber] == false, "already saved block");
@@ -58,7 +70,7 @@ contract Oracle is IOracle {
         returns (TxHashInfo memory)
     {
         TxHashInfo memory info = txInfos[txHash];
-        //find a better way to test null?
+        // find a better way to test null?
         require(info.blockNumber != 0, "No tx info");
         return info;
     }

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-types": " npx typechain --target=ethers-v5 ./forge/out/Oracle.sol/Oracle.json",
     "build": "tsc",
-    "run": "dist/index.js"
+    "start": "dist/src/index.js"
   },
   "author": "maxwolff",
   "license": "ISC",
@@ -20,7 +20,6 @@
   "dependencies": {
     "@typechain/ethers-v5": "^10.1.0",
     "@types/yargs": "^17.0.10",
-    "ethers": "^5.6.9",
-    "yargs": "^17.5.1"
+    "ethers": "^5.6.9"
   }
 }

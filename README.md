@@ -1,21 +1,31 @@
-So far, can deploy oracle locally and push mainnet blocks to the oracle. Havent tried reading, didnt write tests, etc etc
+# Block Oracle
 
-download forge
+A simple oracle for blocks, and a script that posts each block to the oracle.
 
-start `anvil` in new tab
+## To run
 
-cd forge
-forge build
+Install [forge](https://book.getfoundry.sh/getting-started/installation.html)
 
-deploy oracle locally via:
+### Deploy oracle locally via:
 
-- source .env.example
-- forge script script/Oracle.s.sol:ContractScript --fork-url http://localhost:8545 \
-  --private-key $PRIVATE_KEY0 --broadcast
+- Start local node `anvil` in new tab
+- `cd forge`
+- `forge build`
+- `git submodule update --init --recursive`
+- `export $(cat .env | xargs)`
+- `forge create src/Oracle.sol:Oracle --rpc-url http://localhost:8545 \ --private-key $PRIVATE_KEY0`
 
-cd ../
+### Run script to post to contract
 
-post to oracle contract via
+- `npm install`
+- Build typechain contract wrappers `npm run build-types`
+- Compile ts `npm run build`
+- `export $(cat .env | xargs)`
+- `npm start`
 
-- source .env.example
-- ts-node -T src/index.ts post -b homestead -o localhost
+### TODO
+
+- more tests, maybe an integration test (automate test for above)
+- gas golf
+- failure & retry logic for sending txs
+- better way to keep track of contract addresses on diff networks
