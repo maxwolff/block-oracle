@@ -7,12 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-types": " npx typechain --target=ethers-v5 ./forge/out/Oracle.sol/Oracle.json",
     "build": "tsc",
-    "start": "dist/src/index.js"
+    "start": "node dist/src/index.js"
   },
   "author": "maxwolff",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.0.1",
     "tslib": "^2.4.0",
     "typechain": "^8.1.0",
     "typescript": "^4.7.4"

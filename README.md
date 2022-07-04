@@ -25,7 +25,11 @@ Install [forge](https://book.getfoundry.sh/getting-started/installation.html)
 
 ### TODO
 
+- build typescript and compile contracts in docker
 - more tests, maybe an integration test (automate test for above)
 - gas golf
 - failure & retry logic for sending txs
 - better way to keep track of contract addresses on diff networks
+
+docker build . -t m/oracle
+docker run --env-file=.env.example m/oracle

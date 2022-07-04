@@ -1,9 +1,6 @@
 import { ethers } from "ethers";
 import { BlockWithTransactions } from "@ethersproject/abstract-provider";
 import { Oracle__factory } from "../types/ethers-contracts/factories";
-import util from "util";
-import fs from "fs";
-const writeFileAsync = util.promisify(fs.writeFile);
 
 export const rpcMap: { [networkName: string]: string } = {
   homestead: "https://eth-mainnet.alchemyapi.io/v2",

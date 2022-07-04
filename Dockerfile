@@ -4,5 +4,5 @@ EXPOSE 80
 COPY package*.json ./
 ARG NODE_ENV=production
 RUN npm i
-COPY . .
+ADD . /usr/src/app
 CMD npm start
